@@ -1,0 +1,50 @@
+input[type="text"], input[type="password"] {
+    border: 1px solid var(--bo-col);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: var(--m-bg);
+
+    width: 100%;
+}
+
+label {
+    font-size: 1.5rem;
+}
+
+input {
+    padding: 0.7rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    color: var(--m-txt);
+    font-size: 1.2rem;
+}
+
+input:focus-visible {
+    outline: none;
+}
+
+input[type="submit"] {
+    margin: 0 var(--link-dist);
+    padding: var(--link-dist) calc(2 * var(--link-dist));
+
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+
+    color: var(--l-txt);
+    background-color: var(--m-bg);
+}
+
+input[type="submit"]:hover {
+    background-color: var(--lh-bg);
+    color: var(--l-txt);
+}
+
+.content {
+    justify-content: center;
+}
+
+form {
+    margin: 1rem;
+}

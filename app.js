@@ -1,50 +1,66 @@
+// --- Init ----------------------------------------------------------------
+
+require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
-const localStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const crypto = require('bcrypt');
-require('dotenv').config();
+const MongoStore = require('connect-mongo');
+const User = require('./models/user');
 
-const MongoStore = require('connect-mongo')(session);
+const app = express();
+
+// --- Database ----------------------------------------------------------------
+
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DB_CSTR, { useNewUrlParser: true , useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-const UserSchema = new mongoose.Schema({
-  username: String,
-  hash: String
+// --- Passport ----------------------------------------------------------------
+
+passport.use(new LocalStrategy(function (username, password, callback) {
+  User.findOne({ username: username }).then((user) => {
+    if (!user) {
+      return callback(null, false, { message: 'Incorrect username' });
+    }
+
+    crypto.compare(password, user.hash).then((validPassword) => {
+      if (validPassword) {
+        return callback(null, user);
+      }
+      else {
+        return callback(null, false, { message: 'Incorrect password' });
+      }
+    });
+  }).catch((err) => {
+    callback(err);
+  });
+}));
+
+passport.serializeUser((user, callback) => {
+  callback(null, user.id);
 });
 
-mongoose.model('User', UserSchema);
+passport.deserializeUser((id, callback) => {
+  User.findById(id, (err, user) => {
+    if (err) callback(err);
 
-const sessionStore = new MongoStore({
-  mongooseConnection: db,
-  collection: 'sessions'
+    callback(null, user);
+  });
 });
 
-function validPassword(password, hash, salt) {
-  var hashVerify = crypto.
-  return hash === hashVerify;
-}
-function genPassword(password) {
-  var salt = crypto.randomBytes(32).toString('hex');
-  var genHash = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512').toString('hex');
-  
-  return {
-    salt: salt,
-    hash: genHash
-  };
-}
+// --- Routing ----------------------------------------------------------------
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
-const app = express();
+// --- Middleware order ----------------------------------------------------------------
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -60,11 +76,21 @@ app.use(session({
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
-  store: sessionStore
+  store: MongoStore.create({ mongoUrl: process.env.DB_CSTR }),
+  cookie: {
+    maxAge: 1000 * 7
+  }
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// --- Routing middleware ----------------------------------------------------------------
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// --- Error handling ----------------------------------------------------------------
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -81,5 +107,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// --- END ----------------------------------------------------------------
 
 module.exports = app;
