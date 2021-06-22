@@ -7,6 +7,7 @@
                     <a href="/login" class="navbar-link">Login</a>
                     <a href="/register" class="navbar-link">Register</a>
                 <% } else { %>
+                    <a href="<%= user.url %>" class="navbar-link"><%= user.fullName %></a>
                     <a href="/signout" class="navbar-link">Sign-out</a>
                 <% } %>
             </div>

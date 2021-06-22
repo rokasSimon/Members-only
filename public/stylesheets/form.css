@@ -26,7 +26,7 @@ input:focus-visible {
 }
 
 input[type="submit"] {
-    margin: 0 var(--link-dist);
+    margin: 1rem var(--link-dist);
     padding: var(--link-dist) calc(2 * var(--link-dist));
 
     border: 1px solid var(--bo-col);
@@ -47,4 +47,9 @@ input[type="submit"]:hover {
 
 form {
     margin: 1rem;
+}
+
+p {
+    padding: 0;
+    margin: 0.2rem;
 }

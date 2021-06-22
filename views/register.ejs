@@ -9,16 +9,50 @@
   <body>
     <%- include('./layout/header', { user: user }); -%>
     <div class="content">
+        <% for (const error of errors) { %>
+          <p><%= error.msg %> for <%= msg.param %></p>
+        <% } %>
         <form method="POST">
-            <label for="username">Username</label>
+            <h2>Login Information</h2>
+            <label for="username">Username*</label>
             <br>
             <input type="text" name="username" id="username" />
             <br>
 
-            <label for="password">Password</label>
+            <label for="password">Password*</label>
             <br>
             <input type="password" name="password" id="password" />
             <br>
+            <label for="confirmPassword">Confirm Password*</label>
+            <br>
+            <input type="password" name="confirmPassword" id="confirmPassword" />
+            <br>
+
+            <h2>Personal Name</h2>
+            <label for="firstName">First Name*</label>
+            <br>
+            <input type="text" name="firstName" id="firstName" />
+            <br>
+
+            <label for="lastName">Last Name*</label>
+            <br>
+            <input type="text" name="lastName" id="lastName" />
+            <br>
+
+            <h2>User Privileges</h2>
+            <label for="memberCode">Membership Code</label>
+            <br>
+            <p>Enter code to gain member privileges</p>
+            <input type="text" name="memberCode" id="memberCode" />
+            <br>
+
+            <label for="adminCode">Administrator Code</label>
+            <br>
+            <p>Enter code to gain admin privileges</p>
+            <input type="text" name="adminCode" id="adminCode" />
+            <br>
+
+            <p>* - required</p>
 
             <input type="submit" value="Register" >
         </form>
