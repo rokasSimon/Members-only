@@ -20,22 +20,22 @@ Showcase images:
 
 View when not logged in
 
-![No log in view](https://github.com/rokasSimon/Members-only/tree/main/readme/welcome.png)
+![View when not logged in](https://github.com/rokasSimon/Members-only/tree/main/readme_img/welcome.png)
 
 ---
 
 View for admins
 
-![No log in view](https://github.com/rokasSimon/Members-only/tree/main/readme/adminview.png)
+![View for admins](https://github.com/rokasSimon/Members-only/tree/main/readme_img/adminview.png)
 
 ---
 
 View for members
 
-![No log in view](https://github.com/rokasSimon/Members-only/tree/main/readme/memberview.png)
+![View for members](https://github.com/rokasSimon/Members-only/tree/main/readme_img/memberview.png)
 
 ---
 
 Registration view
 
-![No log in view](https://github.com/rokasSimon/Members-only/tree/main/readme/registerview.png)
+![Registration view](https://github.com/rokasSimon/Members-only/tree/main/readme_img/registerview.png)
