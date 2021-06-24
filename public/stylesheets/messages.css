@@ -1,0 +1,56 @@
+.add-button {
+    margin-bottom: 2rem;
+}
+
+.message-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-text {
+    width: 24vw;
+    max-width: 24vw;
+    min-height: 10rem;
+    font-family: 'poppins', sans-serif;
+
+    border: 1px solid var(--bo-col);
+    border-radius: 5px;
+    background-color: var(--s-bgld);
+
+    padding: 0.7rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+
+    color: var(--m-txt);
+    font-size: 1rem;
+}
+
+.message-text:focus-visible {
+    outline: none;
+}
+
+.message {
+    margin: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--bo-col);
+    border-radius: 10px;
+
+    background-color: var(--s-bg3);
+}
+
+.message > p {
+    padding: 0;
+    margin: 0;
+}
+
+.message-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.message-delete {
+    margin: 0.5rem;
+
+    font-size: 1.5rem;
+    color: var(--lh-bg);
+}

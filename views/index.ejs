@@ -3,12 +3,35 @@
   <head>
     <meta charset="UTF-8">
     <title><%= title %></title>
+    <script src="https://kit.fontawesome.com/fc1819c339.js" crossorigin="anonymous"></script>
     <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/messages.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
     <%- include('./layout/header', { user: user }); -%>
     <div class="content">
-        <h1>Welcome to Members Only Fans</h1>
+        <% if (!user) { %>
+          <h1>Welcome to Members Only Fans</h1>
+          <p>To see the messages please log in</p>
+        <% } else { %>
+          <h1>Message Board</h1>
+          <a class="add-button" href="/message/create">Create new message <i class="far fa-plus-square"></i></a>
+          <div class="message-column">
+            <% for (const message of messages) { %>
+              <div class="message">
+                <p class="message-title"><%= message.title %></p>
+                <textarea class="message-text" readonly><%= message.text %></textarea>
+                <p class="message-time"><%= message.timestamp.toLocaleDateString() %></p>
+                <% if (user.isMember) { %>
+                  <p class="message-author">Author: <%= message.creator.fullName %></p>
+                <% } %>
+                <% if (user.isAdmin) { %>
+                  <a class="message-delete" href="<%= message.delete_url %>"><i class="fas fa-trash"></i></a>
+                <% } %>
+              </div>
+            <% } %>
+          </div>
+        <% } %>
     </div>
     <%- include('./layout/footer'); -%>
   </body>

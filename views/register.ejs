@@ -9,9 +9,11 @@
   <body>
     <%- include('./layout/header', { user: user }); -%>
     <div class="content">
-        <% for (const error of errors) { %>
-          <p><%= error.msg %> for <%= msg.param %></p>
-        <% } %>
+        <ul>
+          <% for (const error of errors) { %>
+            <li><%= error.msg %></li>
+          <% } %>
+        </ul>
         <form method="POST">
             <h2>Login Information</h2>
             <label for="username">Username*</label>
@@ -52,7 +54,7 @@
             <input type="text" name="adminCode" id="adminCode" />
             <br>
 
-            <p>* - required</p>
+            <p>* required</p>
 
             <input type="submit" value="Register" >
         </form>

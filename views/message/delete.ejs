@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/form.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <%- include('../layout/header', { user: user }); -%>
+    <div class="content">
+        <form method="POST">
+            <h2>Deleting this message</h2>
+            <label for="title">Title</label>
+            <br>
+            <input type="text" name="title" id="title" readonly value="<%= message.title %>" />
+            <br>
+
+            <label for="text">Text</label>
+            <br>
+            <textarea name="text" id="text" readonly><%= message.text %></textarea>
+            <br>
+
+            <input type="submit" value="Delete Message" >
+        </form>
+    </div>
+    <%- include('../layout/footer'); -%>
+  </body>
+</html>

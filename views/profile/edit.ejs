@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://kit.fontawesome.com/fc1819c339.js" crossorigin="anonymous"></script>
+    <link href="/stylesheets/form.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <%- include('../layout/header', { user: user }); -%>
+    <div class="content">
+        <ul>
+          <% for (const error of errors) { %>
+            <li><%= error.msg %></li>
+          <% } %>
+        </ul>
+        <form method="POST">
+            <h2>Personal Name</h2>
+            <label for="firstName">First Name*</label>
+            <br>
+            <input type="text" name="firstName" id="firstName" value="<%= user.firstName %>" />
+            <br>
+
+            <label for="lastName">Last Name*</label>
+            <br>
+            <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>" />
+            <br>
+
+            <h2>User Privileges</h2>
+            <% if (user.isMember) { %>
+                <p class="label">Membership: <i class="fas fa-check"></i></p>
+            <% } else { %>
+                <label for="memberCode">Membership Code</label>
+                <br>
+                <p>Enter code to gain member privileges</p>
+                <input type="text" name="memberCode" id="memberCode" />
+                <br>
+            <% } %>
+            
+            <% if (user.isAdmin) { %>
+                <p class="label">Administrator: <i class="fas fa-check"></i></p>
+            <% } else { %>
+                <label for="adminCode">Administrator Code</label>
+                <br>
+                <p>Enter code to gain admin privileges</p>
+                <input type="text" name="adminCode" id="adminCode" />
+                <br>
+            <% } %>
+
+            <p>* required</p>
+
+            <input type="submit" value="Update" >
+        </form>
+    </div>
+    <%- include('../layout/footer'); -%>
+  </body>
+</html>

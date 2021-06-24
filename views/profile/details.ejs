@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <script src="https://kit.fontawesome.com/fc1819c339.js" crossorigin="anonymous"></script>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <%- include('../layout/header', { user: user }); -%>
+    <div class="content">
+        <h1>Your profile <a href="/user/<%= user._id %>/edit"><i class="far fa-edit"></i></a></h1>
+        
+        <p>First Name: <span><%= user.firstName %></span></p>
+        <p>Last Name: <%= user.lastName %></p>
+
+        <p>Membership: 
+            <span>
+                <% if (user.isMember) { %>
+                    <i class="fas fa-check"></i>
+                <% } else { %>
+                    <i class="fas fa-times"></i>
+                <% } %>
+            </span>
+        </p>
+        <p>Administrator: 
+            <span>
+                <% if (user.isAdmin) { %>
+                    <i class="fas fa-check"></i>
+                <% } else { %>
+                    <i class="fas fa-times"></i>
+                <% } %>
+            </span>
+        </p>
+    </div>
+    <%- include('../layout/footer'); -%>
+  </body>
+</html>

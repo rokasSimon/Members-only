@@ -59,6 +59,7 @@ passport.deserializeUser((id, callback) => {
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const messageRouter = require('./routes/message');
 
 // --- Middleware order ----------------------------------------------------------------
 
@@ -78,7 +79,7 @@ app.use(session({
   saveUninitialized: true,
   store: MongoStore.create({ mongoUrl: process.env.DB_CSTR }),
   cookie: {
-    maxAge: 1000 * 7
+    maxAge: 1000 * 60 * 30
   }
 }));
 
@@ -88,7 +89,8 @@ app.use(passport.session());
 // --- Routing middleware ----------------------------------------------------------------
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
+app.use('/message', messageRouter);
 
 // --- Error handling ----------------------------------------------------------------
 

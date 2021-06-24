@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <%- include('../layout/header', { user: user }); -%>
+    <div class="content">
+        <% if (user) { %>
+          <h1>You can only visit your own created resources!</h1>
+        <% } else { %>
+          <h1>You have to be logged in!</h1>
+        <% } %>
+    </div>
+    <%- include('../layout/footer'); -%>
+  </body>
+</html>
